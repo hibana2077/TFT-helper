@@ -18,7 +18,7 @@ def comp_card(
     ):
     card = st.container(border=True, key=row['cluster_index'])
     card_title = row['tag'].replace(f"{tft_version}_","")
-    card.title(f"[{card_title}]({row['name']})")
+    card.markdown(f"## [{card_title}]({row['name']})")
     cols = card.columns([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
     for i, unit in enumerate(row[:-3]):
         if pd.notna(unit):
