@@ -35,3 +35,7 @@ else:
 
 # 顯示結果
 st.dataframe(filtered_df)
+for index, row in filtered_df.iterrows():
+    st.write(f"Cluster ID: {row['cluster_id']}")
+    st.write(f"Units: {', '.join(row[:-1].dropna())}")
+    st.write("---")

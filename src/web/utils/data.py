@@ -1,5 +1,5 @@
 import requests
-import json
+import streamlit as st
 
 COMPS_DATA_URL = "https://api-hc.metatft.com/tft-comps-api/comps_data"
 COMPS_STATS_URL = 'https://api-hc.metatft.com/tft-comps-api/comps_stats?queue={queue}&patch=current&days=2&rank=CHALLENGER,DIAMOND,GRANDMASTER,MASTER&permit_filter_adjustment=true'
@@ -60,6 +60,17 @@ def get_comp_details(comp_num:int) -> dict:
 
     response = requests.get(url, headers=headers)
     return response.json()
+
+@st.cache_data
+def get_tft_version() -> str:
+    """
+    Fetches the current TFT version from the comps API.
+    """
+    url = COMPS_DATA_URL
+    headers = HEADERS
+
+    response = requests.get(url, headers=headers)
+    return str(response.json().get('tft_set', '14').replace('Set',''))
 
 if __name__ == "__main__":
     data = get_comps_data()
