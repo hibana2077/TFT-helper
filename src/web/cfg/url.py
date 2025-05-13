@@ -1,0 +1,1 @@
+SHARE_LINK = "https://www.metatft.com/comps#{tag}"

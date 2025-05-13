@@ -1,0 +1,34 @@
+services:
+  web:
+    build: ./web
+    ports:
+      - "4321:80"
+    volumes:
+      - ./web:/app
+    environment:
+      OPENROUTE_API_KEY: ${OPENROUTE_API_KEY}
+      LLM_MODEL: ${LLM_MODEL}
+    depends_on:
+      - db
+    networks:
+      - tft-net
+
+  db:
+    image: couchdb:latest
+    container_name: tft-db
+    networks:
+      - tft-net
+    ports:
+      - "5984:5984"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+    volumes:
+      - db_data:/opt/couchdb/data
+
+volumes:
+  db_data:
+
+networks:
+  tft-net:
+    driver: bridge
