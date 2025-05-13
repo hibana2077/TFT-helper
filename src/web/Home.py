@@ -36,6 +36,7 @@ def load_data():
             'name': SHARE_LINK.format(tag=tags_for_link),
             'tag': tags_for_name,
             'name_string': value['name_string'],
+            'levelling': value['levelling'],
         })
     return pd.DataFrame(new_data)
 
